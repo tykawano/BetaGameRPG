@@ -1,0 +1,16 @@
+General To-Dos
+
+Player animation
+map creation
+
+
+PLAYER ANIMATION STEPS
+- Create tool class
+- In tool class make a horizontal flipper method. (done)
+- In tool class make a scale image method. (done)
+- In tool class make a player animation finder method which will find player tick-speed, animation speed for each animation.
+- Make 2d array in PAS class. (done)
+- In PAS create a load method that sets every index of 2d array to each animation in correct order including the left animations.(done)
+- In PAS make play animations methods for playing each animation.
+- Scale background tiles in TileManager class. (done)
+
