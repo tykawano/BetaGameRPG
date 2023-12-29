@@ -78,7 +78,7 @@ public class Player extends Entity{
         if(animationTick >= animationSpeed){
             animationTick = 0;
             animationIndex++;
-            if(animationIndex >= GetPlayerActionFrame(playerAction)){
+            if(animationIndex > GetPlayerActionFrame(playerAction)){
                 animationIndex = 0;
             }
         }
