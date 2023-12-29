@@ -8,6 +8,9 @@ public abstract class Entity {
     public int speed;
     public Rectangle rectangle;
     String direction;
+    public int animationTick;
+    public int animationIndex;
+    public int animationSpeed;
 
 
 

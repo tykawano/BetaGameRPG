@@ -13,17 +13,19 @@ import static Utils.Constants.PlayerConstants.*;
 
 public class Player extends Entity{
 
-    private GamePanel gp;
-    private KbInputs kb;
-    private MouseInputs mouse;
-    private PlayerAnimationsSetter setter;
+    private final GamePanel gp;
+    private final KbInputs kb;
+    private final MouseInputs mouse;
+    private final PlayerAnimationsSetter setter;
+    public final int raw_Player_Image_X = 37*4;
+    public final int raw_Player_Image_Y = 24*4;
+    public final int raw_Player_Image_Width = 14*4;
+    public final int raw_Player_Image_Height = 21*4;
     public int playerScreenX;
     public int playerScreenY;
     private int playerAction = idleDown;
-    private int animationTick = 0;
-    private int animationIndex = 0;
-    private int animationSpeed = 10;
     private BufferedImage[][] animations;
+    public boolean vertMovement;
     public Player(GamePanel gp, KbInputs kb, MouseInputs mouse) throws IOException {
         this.gp = gp;
         this.kb = kb;
@@ -36,17 +38,23 @@ public class Player extends Entity{
         animations = setter.getPlayerAnimations();
         worldX = 500;
         worldY = 500;
-        playerScreenX = (gp.pixelWidth/2) - gp.halfTile;
-        playerScreenY = (gp.pixelHeight/2) - gp.halfTile;
+        playerScreenX = (gp.pixelWidth/2) - raw_Player_Image_X - (raw_Player_Image_Width/2);
+        playerScreenY = (gp.pixelHeight/2) - raw_Player_Image_Y - (raw_Player_Image_Height/2);
         speed = 5;
         direction = "down";
+        animationTick = 0;
+        animationIndex = 0;
+        animationSpeed = 10;
     }
 
     public void update(){
         if(kb.isDownPressed() || kb.isRightPressed() || kb.isUpPressed() || kb.isLeftPressed()){
             if(kb.isUpPressed() && playerAction != walkUp){
-                animationTick = 0;
-                animationIndex = 0;
+                if(!vertMovement){
+                    animationTick = 0;
+                    animationIndex = 0;
+                }
+                vertMovement = true;
                 direction = "up";
                 worldY -= speed;
                 playerAction = walkUp;
@@ -55,9 +63,12 @@ public class Player extends Entity{
                 worldY -= speed;
             }
 
-            if (kb.isDownPressed() && playerAction != walkDown) {
-                animationTick = 0;
-                animationIndex = 0;
+            else if (kb.isDownPressed() && playerAction != walkDown) {
+                if(!vertMovement){
+                    animationTick = 0;
+                    animationIndex = 0;
+                }
+                vertMovement = true;
                 direction = "down";
                 worldY += speed;
                 playerAction =  walkDown;
@@ -67,8 +78,11 @@ public class Player extends Entity{
             }
 
             if(kb.isLeftPressed() && playerAction != walkLeft){
-                animationTick = 0;
-                animationIndex = 0;
+                if(!vertMovement){
+                    animationTick = 0;
+                    animationIndex = 0;
+                }
+                vertMovement = true;
                 direction = "left";
                 worldX -= speed;
                 playerAction =  walkLeft;
@@ -78,8 +92,11 @@ public class Player extends Entity{
             }
 
             if(kb.isRightPressed() && playerAction != walkRight){
-                animationTick = 0;
-                animationIndex = 0;
+                if(!vertMovement){
+                    animationTick = 0;
+                    animationIndex = 0;
+                }
+                vertMovement = true;
                 direction = "right";
                 worldX += speed;
                 playerAction = walkRight;
@@ -90,21 +107,25 @@ public class Player extends Entity{
         }
         else {
             if(direction.equals("up") && playerAction != idleUp){
+                vertMovement = false;
                 animationTick = 0;
                 animationIndex = 0;
                 playerAction = idleUp;
             }
             if (direction.equals("down") && playerAction != idleDown) {
+                vertMovement = false;
                 animationTick = 0;
                 animationIndex = 0;
                 playerAction = idleDown;
             }
             if (direction.equals("left") && playerAction != idleLeft) {
+                vertMovement = false;
                 animationTick = 0;
                 animationIndex = 0;
                 playerAction = idleLeft;
             }
             if (direction.equals("right") && playerAction != idleRight) {
+                vertMovement = false;
                 animationTick = 0;
                 animationIndex = 0;
                 playerAction = idleRight;
@@ -127,7 +148,7 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) throws InterruptedException {
-        g2.drawImage(animations[playerAction][animationIndex],worldX,worldY,null);
+        g2.drawImage(animations[playerAction][animationIndex],playerScreenX,playerScreenY,null);
     }
 
 

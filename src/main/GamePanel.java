@@ -4,7 +4,6 @@ import Background.TileManager;
 import Entitys.Player;
 import Inputs.KbInputs;
 import Inputs.MouseInputs;
-import Utils.PlayerAnimationsSetter;
 
 import javax.swing.*;
 import java.awt.*;
