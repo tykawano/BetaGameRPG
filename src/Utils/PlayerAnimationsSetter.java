@@ -8,9 +8,6 @@ import java.util.Objects;
 
 public class PlayerAnimationsSetter {
     BufferedImage[][] playerAnimations;
-    int i = 0;
-    int tickSpeed = 5;
-    int framesAmount = 7;
     public final int originalPlayerWidth = 64;
     public final int originalPlayerHeight = 65;
     public final int playerWidth = originalPlayerWidth*5;
@@ -84,31 +81,16 @@ public class PlayerAnimationsSetter {
     // Helper method that takes all frames of right animations and flips them to the left
     private void flipAnimation(int heightIndex, Tools tools, BufferedImage rightAnimation){
         BufferedImage scale;
+        BufferedImage exactCharacter;
         for (int i = 0; i < playerAnimations[0].length; i++) {
-            scale = tools.flipHorizontally(rightAnimation.getSubimage(originalPlayerWidth*i,0,originalPlayerWidth,originalPlayerHeight));
+            scale = rightAnimation.getSubimage(originalPlayerWidth*i,0,originalPlayerWidth,originalPlayerHeight);
+            exactCharacter = scale.getSubimage()
             playerAnimations[heightIndex][i] = tools.scaleImage(scale, playerWidth, playerHeight);
         }
     }
 
-
-
-    public void drawTest(Graphics2D g2) throws InterruptedException {
-        g2.drawImage(playerAnimations[19][i],253,253,null);
-        Thread.sleep(90);
-        i += 1;
-        if(i >= framesAmount){
-            i = 0;
-        }
-
-
+    public BufferedImage[][] getPlayerAnimations() {
+        return playerAnimations;
     }
-
-
-
-    public void doIdleFrame(){
-
-    }
-
-
 }
 

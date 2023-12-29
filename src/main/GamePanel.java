@@ -32,13 +32,11 @@ public class GamePanel extends JPanel implements Runnable{
     // objects
     public TileManager manager;
     public Player player;
-    public PlayerAnimationsSetter ani;
     public GamePanel() throws IOException {
         this.setup();
-        this.startThread();
-        this.player = new Player(this,keys,mouse);
         this.manager = new TileManager(this);
-        ani = new PlayerAnimationsSetter();
+        this.player = new Player(this,keys,mouse);
+        this.startThread();
     }
     @Override
     public void run() {
@@ -82,10 +80,8 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawRect(j,i,size,size);
             }
         }
-//        player.draw(g2);
-
         try {
-            ani.drawTest(g2);
+            player.draw(g2);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
