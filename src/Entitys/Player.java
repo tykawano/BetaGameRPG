@@ -17,10 +17,10 @@ public class Player extends Entity{
     private final KbInputs kb;
     private final MouseInputs mouse;
     private final PlayerAnimationsSetter setter;
-    public final int raw_Player_Image_X = 37*4;
-    public final int raw_Player_Image_Y = 24*4;
-    public final int raw_Player_Image_Width = 14*4;
-    public final int raw_Player_Image_Height = 21*4;
+    public final int raw_Player_Image_X = 37*3;
+    public final int raw_Player_Image_Y = 24*3;
+    public final int raw_Player_Image_Width = 14*3;
+    public final int raw_Player_Image_Height = 21*3;
     public int playerScreenX;
     public int playerScreenY;
     private int playerAction = idleDown;
