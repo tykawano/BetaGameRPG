@@ -12,7 +12,6 @@ import java.util.Objects;
 public class TileManager extends SuperTileManager {
     GamePanel gp;
     Tools tools;
-    BufferedImage originalImageGrass, originalImageStone, originalImageShadow_1, originalImageShadow_2, originalImageStair, originalImagePlant, originalImageProp, originalImageWall;
     Tile[] baseTileSet;
     BufferedImage[] shadowSet;
     BufferedImage[] stairSet;
@@ -24,10 +23,54 @@ public class TileManager extends SuperTileManager {
         this.setUpDefault();
         tools = new Tools();
         map = setupMap();
-        baseTileSet = new Tile[138];
-        this.loadTiles();
-        this.loadShadows();
+        this.loadTileSet();
+        this.loadTextures();
     }
+
+    public void draw(Graphics2D g2){
+        displayTileArray(g2);
+        g2.drawImage(wallSet[9],0,0,null);
+    }
+    public int[][] setupMap(){
+
+        return new int[][]{
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,65,50,50,71,48,70},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,52,43,42,43,42,42,58},
+                {70,51,48,47,49,46,46,47,49,64,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,42,42,61,63,43,42,66},
+                {56,67,59,50,43,42,42,42,42,42,58,61,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,70,43,66,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,42,50,58,50,66,67,51,43,50,60,42,42,67,59,50,51,43,71,65,50,51,62,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,51,66,55,54,54,63,55,54,54,54,54,56,68,57,54,54,56,67,59,50,62,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,50,64,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,60,71,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,68,50,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,42,45,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,65,43,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,42,62,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,44,51,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,52,42,42,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,59,71,49,49,48,47,64,46,46,46,47,46,46,46,64,49,48,70,43,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,65,43,59,58,50,43,51,42,67,51,58,43,59,57,43,42,58,59,42,66,10,10,10,10,10,10,10,10},
+                {42,10,10,10,10,10,10,51,58,66,10,10,10,10,10,10,10,43,50,70,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {43,42,42,42,42,43,50,66,62,10,10,10,10,10,10,10,10,51,51,59,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,50,50,51,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,59,43,43,42,42,42,42,42,42,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,43,42,42,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+        };
+    }
+
+    public void displayTileArray(Graphics2D g2){
+        int height = 0;
+        int width;
+        for (int i = 0; i < map.length; i++) {
+            width = 0;
+            for (int j = 0; j < map[i].length; j++) {
+                int currNum = map[i][j];
+                g2.drawImage(baseTileSet[currNum].getTileImage(),width,height,null);
+                width += gp.size;
+            }
+            height += gp.size;
+        }
+    }
+
     public void setUpDefault(){
         mapTileCol = 20;
         mapTileRow = 36;
@@ -35,46 +78,100 @@ public class TileManager extends SuperTileManager {
         mapPixelWidth = mapTileRow*gp.size;
     }
 
-    public void loadShadows() throws IOException {
+
+    public void loadTileSet() throws IOException {
+        baseTileSet = new Tile[138];
+        BufferedImage originalImageGrass = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/GrassSet.png")));
+
+        BufferedImage temp;
+        int index = 10;
+        for (int i = 0; i < originalImageGrass.getHeight(); i+=32) {
+            for (int j = 0; j < originalImageGrass.getWidth(); j+=32) {
+                temp = originalImageGrass.getSubimage(j,i,32,32);
+                temp = tools.scaleImage(temp, gp.size,gp.size);
+                baseTileSet[index] = new Tile(temp, "Grass");
+                index++;
+            }
+        }
+
+        BufferedImage originalImageStone = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/StoneSet.png")));
+
+        for (int i = 0; i < originalImageStone.getHeight(); i+=32) {
+            for (int j = 0; j < originalImageStone.getWidth(); j+=32) {
+                temp = originalImageStone.getSubimage(j,i,32,32);
+                temp = tools.scaleImage(temp, gp.size,gp.size);
+                baseTileSet[index] = new Tile(temp, "Stone");
+                index++;
+            }
+        }
+    }
+    public void loadTextures() throws IOException {
+        loadShadowSet();
+        loadStairSet();
+        loadPlantSet();
+        loadPropSet();
+        loadWallSet();
+    }
+    private void loadWallSet() throws IOException {
+        BufferedImage originalImageWall = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/WallSet.png")));
+        wallSet = new BufferedImage[11];
+
+        // up-high and down-low, small up-high structures
+        wallSet[0] = setTextureSubImage(originalImageWall,32,32,96,128);
+        wallSet[1] = setTextureSubImage(originalImageWall,152,32,114,104);
+        wallSet[2] = setTextureSubImage(originalImageWall,384,64,64,96);
+        // large wall piece, small wall piece normal, small wall piece damaged
+        wallSet[3] = setTextureSubImage(originalImageWall,32,192,128,64);
+        wallSet[4] = setTextureSubImage(originalImageWall,32,288,64,64);
+        wallSet[5] = setTextureSubImage(originalImageWall,128,288,64,64);
+        // small wall with window
+        wallSet[6] = setTextureSubImage(originalImageWall,192,192,32,64);
+        // railing verticals
+        wallSet[7] = setTextureSubImage(originalImageWall,288,32,13,96);
+        wallSet[8] = setTextureSubImage(originalImageWall,344,32,12,96);
+        // railing horizontal
+        wallSet[9] = setTextureSubImage(originalImageWall,384,32,96,13);
+    }
+    private void loadShadowSet() throws IOException {
         // Shadows load
-        originalImageShadow_1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet1.png")));
-        originalImageShadow_2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet2.png")));
+        BufferedImage originalImageShadow_1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet1.png")));
+        BufferedImage originalImageShadow_2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet2.png")));
         float opacityValue = 0.3f;
         originalImageShadow_1 = tools.changeImageOpacity(originalImageShadow_1, opacityValue);
         originalImageShadow_2 = tools.changeImageOpacity(originalImageShadow_2, opacityValue);
         shadowSet = new BufferedImage[38];
 
         // large tree
-        shadowSet[0] = setTextureSubImage(originalImageShadow_1,0,0,134,152);
+        shadowSet[0] = setTextureSubImage(originalImageShadow_1,48,100,86,52);
         // medium tree
-        shadowSet[1] = setTextureSubImage(originalImageShadow_1,134,0,121,151);
+        shadowSet[1] = setTextureSubImage(originalImageShadow_1,173,105,82,46);
         //small tree
-        shadowSet[2] = setTextureSubImage(originalImageShadow_1,255,0,123,151);
+        shadowSet[2] = setTextureSubImage(originalImageShadow_1,304,111,74,41);
         // bush 1
-        shadowSet[3] = setTextureSubImage(originalImageShadow_1,0,151,61,67);
+        shadowSet[3] = setTextureSubImage(originalImageShadow_1,39,207,22,12);
         // bush 2
-        shadowSet[4] = setTextureSubImage(originalImageShadow_1,61,151,66,70);
+        shadowSet[4] = setTextureSubImage(originalImageShadow_1,99,205,28,17);
         // bush 3
-        shadowSet[5] = setTextureSubImage(originalImageShadow_1,127,151,70,71);
+        shadowSet[5] = setTextureSubImage(originalImageShadow_1,160,206,37,17);
         // bush 4
-        shadowSet[6] = setTextureSubImage(originalImageShadow_1,197,151,69,77);
+        shadowSet[6] = setTextureSubImage(originalImageShadow_1,220,205,46,24);
         // bush 5
-        shadowSet[7] = setTextureSubImage(originalImageShadow_1,266,151,57,81);
+        shadowSet[7] = setTextureSubImage(originalImageShadow_1,285,209,38,24);
         // bush 6
-        shadowSet[8] = setTextureSubImage(originalImageShadow_1,323,151,66,75);
+        shadowSet[8] = setTextureSubImage(originalImageShadow_1,348,198,41,29);
 
         // transparent block
-        shadowSet[9] = setTextureSubImage(originalImageShadow_2,0,0,71,64);
+        shadowSet[9] = setTextureSubImage(originalImageShadow_2,32,30,39,34);
         // chest
-        shadowSet[10] = setTextureSubImage(originalImageShadow_2,71,0,62,61);
+        shadowSet[10] = setTextureSubImage(originalImageShadow_2,97,42,36,19);
         // large crate
-        shadowSet[11] = setTextureSubImage(originalImageShadow_2,133,0,66,64);
+        shadowSet[11] = setTextureSubImage(originalImageShadow_2,160,30,39,34);
         // medium ruin pillar
-        shadowSet[12] = setTextureSubImage(originalImageShadow_2,199,0,60,60);
+        shadowSet[12] = setTextureSubImage(originalImageShadow_2,228,29,31,31);
         // bench front
-        shadowSet[13] = setTextureSubImage(originalImageShadow_2,259,0,96,60);
+        shadowSet[13] = setTextureSubImage(originalImageShadow_2,295,36,60,24);
         // bench facing left
-        shadowSet[14] = setTextureSubImage(originalImageShadow_2,355,0,64,63);
+        shadowSet[14] = setTextureSubImage(originalImageShadow_2,387,15,32,63);
         // prayer statue
         shadowSet[15] = setTextureSubImage(originalImageShadow_2,446,54,37,39);
         // door closed
@@ -122,87 +219,130 @@ public class TileManager extends SuperTileManager {
         // broken well
         shadowSet[37] = setTextureSubImage(originalImageShadow_2,420,365,58,43);
     }
+    private void loadStairSet() throws IOException {
+        BufferedImage originalImageStair = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/StairSet.png")));
+        stairSet = new BufferedImage[8];
 
+        // no moss stairs both, right, left
+        stairSet[0] = setTextureSubImage(originalImageStair,32,32,64,96);
+        stairSet[1] = setTextureSubImage(originalImageStair,128,32,65,96);
+        stairSet[2] = setTextureSubImage(originalImageStair,224,32,65,96);
+
+        // moss stairs both, right, left
+        stairSet[3] = setTextureSubImage(originalImageStair,32,160,64,96);
+        stairSet[4] = setTextureSubImage(originalImageStair,128,160,65,96);
+        stairSet[5] = setTextureSubImage(originalImageStair,224,160,65,96);
+
+        // archway with edge ont top
+        stairSet[6] = setTextureSubImage(originalImageStair,408,27,80,64);
+        stairSet[7] = setTextureSubImage(originalImageStair,416,128,64,64);
+    }
+    private void loadPlantSet() throws IOException {
+        BufferedImage originalImagePlant = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/PlantSet.png")));
+        plantsSet = new BufferedImage[25];
+
+        // Trees small, medium and large
+        plantsSet[0] = setTextureSubImage(originalImagePlant,24,14,113,139);
+        plantsSet[1] = setTextureSubImage(originalImagePlant,161,17,95,136);
+        plantsSet[2] = setTextureSubImage(originalImagePlant,295,31,79,120);
+
+        // bushes small to big
+        plantsSet[3] = setTextureSubImage(originalImagePlant,38,198,22,19);
+        plantsSet[4] = setTextureSubImage(originalImagePlant,98,195,27,25);
+        plantsSet[5] = setTextureSubImage(originalImagePlant,156,190,38,32);
+        plantsSet[6] = setTextureSubImage(originalImagePlant,216,185,47,42);
+        plantsSet[7] = setTextureSubImage(originalImagePlant,282,186,39,45);
+        plantsSet[8] = setTextureSubImage(originalImagePlant,346,190,40,35);
+
+        // blades of grass
+        int index = 9;
+        for (int i = 384; i < 512; i+=32) {
+            for (int j = 0; j < 128; j+=32) {
+                plantsSet[index] = setTextureSubImage(originalImagePlant,j,i,32,32);
+                index++;
+            }
+        }
+    }
+    private void loadPropSet() throws IOException {
+        BufferedImage originalImageProp = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/PropsSet.png")));
+        propsSet = new BufferedImage[48];
+        // transparent cube
+        propsSet[0] = setTextureSubImage(originalImageProp,32,18,64,64);
+        // door open and close
+        propsSet[1] = setTextureSubImage(originalImageProp,29,103,37,50);
+        propsSet[2] = setTextureSubImage(originalImageProp,29,166,37,53);
+        // chest closed and open
+        propsSet[3] = setTextureSubImage(originalImageProp,96,30,32,31);
+        propsSet[4] = setTextureSubImage(originalImageProp,96,76,32,49);
+        // right and left sign
+        propsSet[5] = setTextureSubImage(originalImageProp,99,160,27,32);
+        propsSet[6] = setTextureSubImage(originalImageProp,96,224,27,32);
+        // Crate large and small
+        propsSet[7] = setTextureSubImage(originalImageProp,160,18,32,46);
+        propsSet[8] = setTextureSubImage(originalImageProp,163,86,26,39);
+        // barrel
+        propsSet[9] = setTextureSubImage(originalImageProp,162,153,28,36);
+        // vase 1,2 and 3
+        propsSet[10] = setTextureSubImage(originalImageProp,165,217,21,34);
+        propsSet[11] = setTextureSubImage(originalImageProp,164,288,25,27);
+        propsSet[12] = setTextureSubImage(originalImageProp,165,348,21,32);
+        // ruin pillars medium, large, and small
+        propsSet[13] = setTextureSubImage(originalImageProp,227,9,26,52);
+        propsSet[14] = setTextureSubImage(originalImageProp,227,91,26,66);
+        propsSet[15] = setTextureSubImage(originalImageProp,227,183,26,38);
+        // grave tombstone, cross, and small tombstone
+        propsSet[16] = setTextureSubImage(originalImageProp,225,239,30,41);
+        propsSet[17] = setTextureSubImage(originalImageProp,227,303,26,40);
+        propsSet[18] = setTextureSubImage(originalImageProp,289,251,30,29);
+        // ruin lighting medium, large, and small
+        propsSet[19] = setTextureSubImage(originalImageProp,270,29,5,26);
+        propsSet[20] = setTextureSubImage(originalImageProp,270,111,5,40);
+        propsSet[21] = setTextureSubImage(originalImageProp,270,203,5,12);
+        // bench looking front, left and right
+        propsSet[22] = setTextureSubImage(originalImageProp,292,19,56,41);
+        propsSet[23] = setTextureSubImage(originalImageProp,387,2,27,61);
+        propsSet[24] = setTextureSubImage(originalImageProp,387,98,27,61);
+        // coffin sideways and upright
+        propsSet[25] = setTextureSubImage(originalImageProp,288,87,64,36);
+        propsSet[26] = setTextureSubImage(originalImageProp,288,158,32,57);
+        // stone cube
+        propsSet[27] = setTextureSubImage(originalImageProp,288,306,32,46);
+        // angel statue
+        propsSet[28] = setTextureSubImage(originalImageProp,445,21,37,72);
+        // lamp
+        propsSet[29] = setTextureSubImage(originalImageProp,453,118,22,37);
+        // pillar and broken pillar
+        propsSet[30] = setTextureSubImage(originalImageProp,352,174,32,77);
+        propsSet[31] = setTextureSubImage(originalImageProp,416,194,32,57);
+        //spawner
+        propsSet[32] = setTextureSubImage(originalImageProp,353,269,94,72);
+        // broken well
+        propsSet[33] = setTextureSubImage(originalImageProp,420,359,55,49);
+        // small ruins for spawner
+        propsSet[34] = setTextureSubImage(originalImageProp,330,266,5,5);
+        propsSet[35] = setTextureSubImage(originalImageProp,330,273,5,5);
+        propsSet[36] = setTextureSubImage(originalImageProp,337,266,5,5);
+        propsSet[37] = setTextureSubImage(originalImageProp,337,273,5,5);
+        // Huge rock
+        propsSet[38] = setTextureSubImage(originalImageProp,3,430,57,42);
+        // regular rocks smallest to largest
+        propsSet[39] = setTextureSubImage(originalImageProp,10,492,11,10);
+        propsSet[40] = setTextureSubImage(originalImageProp,40,490,16,14);
+        propsSet[41] = setTextureSubImage(originalImageProp,68,487,25,19);
+        propsSet[42] = setTextureSubImage(originalImageProp,100,487,24,19);
+        propsSet[43] = setTextureSubImage(originalImageProp,130,484,27,22);
+        propsSet[44] = setTextureSubImage(originalImageProp,162,482,27,27);
+        // bricks increasing in quantity
+        propsSet[45] = setTextureSubImage(originalImageProp,231,489,18,16);
+        propsSet[46] = setTextureSubImage(originalImageProp,263,488,19,16);
+        propsSet[47] = setTextureSubImage(originalImageProp,289,486,31,19);
+    }
     private BufferedImage setTextureSubImage(BufferedImage originalImage, int x,int y, int width, int height){
         BufferedImage scaledImage;
         originalImage = originalImage.getSubimage(x,y,width,height);
         scaledImage = tools.scaleImage(originalImage,width*2,height*2);
 
         return scaledImage;
-    }
-
-    public int[][] setupMap(){
-
-        return new int[][]{
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,65,50,50,71,48,70},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,52,43,42,43,42,42,58},
-                {70,51,48,47,49,46,46,47,49,64,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,42,42,61,63,43,42,66},
-                {56,67,59,50,43,42,42,42,42,42,58,61,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,70,43,66,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,42,50,58,50,66,67,51,43,50,60,42,42,67,59,50,51,43,71,65,50,51,62,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,51,66,55,54,54,63,55,54,54,54,54,56,68,57,54,54,56,67,59,50,62,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,50,64,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,60,71,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,68,50,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,42,45,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,65,43,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,42,62,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,44,51,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,52,42,42,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,59,71,49,49,48,47,64,46,46,46,47,46,46,46,64,49,48,70,43,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,65,43,59,58,50,43,51,42,67,51,58,43,59,57,43,42,58,59,42,66,10,10,10,10,10,10,10,10},
-                {42,10,10,10,10,10,10,51,58,66,10,10,10,10,10,10,10,43,50,70,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {43,42,42,42,42,43,50,66,62,10,10,10,10,10,10,10,10,51,51,59,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,50,50,51,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,59,43,43,42,42,42,42,42,42,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,43,42,42,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-        };
-    }
-//12, 18
-    public void displayTileArray(Graphics2D g2){
-        int height = 0;
-        int width;
-        for (int i = 0; i < map.length; i++) {
-            width = 0;
-            for (int j = 0; j < map[i].length; j++) {
-                int currNum = map[i][j];
-                g2.drawImage(baseTileSet[currNum].getTileImage(),width,height,null);
-                width += gp.size;
-            }
-            height += gp.size;
-        }
-    }
-
-
-    public void draw(Graphics2D g2){
-        displayTileArray(g2);
-        g2.drawImage(shadowSet[0],0,0,null);
-    }
-
-    public void loadTiles() throws IOException {
-        originalImageGrass = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/GrassSet.png")));
-
-        BufferedImage temp;
-        int index = 10;
-        for (int i = 0; i < originalImageGrass.getHeight(); i+=32) {
-            for (int j = 0; j < originalImageGrass.getWidth(); j+=32) {
-                temp = originalImageGrass.getSubimage(j,i,32,32);
-                temp = tools.scaleImage(temp, gp.size,gp.size);
-                baseTileSet[index] = new Tile(temp, "Grass");
-                index++;
-            }
-        }
-
-        originalImageStone = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/StoneSet.png")));
-
-        for (int i = 0; i < originalImageStone.getHeight(); i+=32) {
-            for (int j = 0; j < originalImageStone.getWidth(); j+=32) {
-                temp = originalImageStone.getSubimage(j,i,32,32);
-                temp = tools.scaleImage(temp, gp.size,gp.size);
-                baseTileSet[index] = new Tile(temp, "Stone");
-                index++;
-            }
-        }
-
-
     }
 
 
