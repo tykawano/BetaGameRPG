@@ -79,15 +79,10 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.drawRect(j,i,size,size);
             }
         }
-        try {
-            player.draw(g2);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        player.draw(g2);
 
 
         g2.dispose();
-
     }
     public void update(){
         player.update();

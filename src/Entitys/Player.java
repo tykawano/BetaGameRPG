@@ -2,6 +2,7 @@ package Entitys;
 
 import Inputs.KbInputs;
 import Inputs.MouseInputs;
+import Utils.Constants;
 import Utils.PlayerAnimationsSetter;
 import main.GamePanel;
 
@@ -37,8 +38,8 @@ public class Player extends Entity{
 
     public void defaultPlayer(){
         animations = setter.getPlayerAnimations();
-        worldX = 0;
-        worldY = 0;
+        worldX = gp.manager.mapPixelWidth/2;
+        worldY = gp.manager.mapPixelHeight/2;
         playerScreenX = (gp.pixelWidth/2) - raw_Player_Image_X - (raw_Player_Image_Width/2);
         playerScreenY = (gp.pixelHeight/2) - raw_Player_Image_Y - (raw_Player_Image_Height/2);
         speed = 6;
@@ -148,7 +149,7 @@ public class Player extends Entity{
         }
     }
 
-    public void draw(Graphics2D g2) throws InterruptedException {
+    public void draw(Graphics2D g2) {
         g2.drawImage(animations[playerAction][animationIndex],playerScreenX,playerScreenY,null);
         g2.setColor(Color.WHITE);
         g2.drawRect(playerScreenX + raw_Player_Image_X,playerScreenY + raw_Player_Image_Y,raw_Player_Image_Width,raw_Player_Image_Height);
