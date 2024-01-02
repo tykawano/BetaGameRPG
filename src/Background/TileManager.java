@@ -7,29 +7,64 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager extends SuperTileManager {
-    GamePanel gp;
-    Tools tools;
     Tile[] baseTileSet;
+    ArrayList<Textures> textureList;
     BufferedImage[] shadowSet;
     BufferedImage[] stairSet;
     BufferedImage[] plantsSet;
     BufferedImage[] propsSet;
     BufferedImage[] wallSet;
     public TileManager(GamePanel gp) throws IOException {
-        this.gp = gp;
-        this.setUpDefault();
-        tools = new Tools();
+        this.setUpDefault(gp);
         map = setupMap();
         this.loadTileSet();
         this.loadTextures();
+        this.putInTextures();
     }
 
     public void draw(Graphics2D g2){
         displayTileArray(g2);
-        g2.drawImage(wallSet[9],0,0,null);
+        displayTextures(g2);
+    }
+    public void displayTextures(Graphics g2){
+        for (int i = 0; i < textureList.size(); i++) {
+            Textures textureCurr = textureList.get(i);
+            int y_draw_from_player = textureCurr.getWorldY() - gp.player.getWorldY() + gp.player.getPlayerScreenY() + gp.player.getRaw_Player_Image_Y();
+            int x_draw_from_player = textureCurr.getWorldX() - gp.player.getWorldX() + gp.player.getPlayerScreenX() + gp.player.getRaw_Player_Image_X();
+            g2.drawImage(textureCurr.getImage(),x_draw_from_player,y_draw_from_player,null);
+        }
+    }
+    public void putInTextures(){
+        putInTextureHelper(wallSet[3],1000,200);
+        putInTextureHelper(wallSet[3],200,600);
+    }
+    private void loadWallSet() throws IOException {
+        BufferedImage originalImageWall = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/WallSet.png")));
+        wallSet = new BufferedImage[11];
+
+        // up-high and down-low, small up-high structures
+        wallSet[0] = setTextureSubImage(originalImageWall,32,32,96,128);
+        wallSet[1] = setTextureSubImage(originalImageWall,152,32,114,104);
+        wallSet[2] = setTextureSubImage(originalImageWall,384,64,64,96);
+        // large wall piece, small wall piece normal, small wall piece damaged
+        wallSet[3] = setTextureSubImage(originalImageWall,32,192,128,64);
+        wallSet[4] = setTextureSubImage(originalImageWall,32,288,64,64);
+        wallSet[5] = setTextureSubImage(originalImageWall,128,288,64,64);
+        // small wall with window
+        wallSet[6] = setTextureSubImage(originalImageWall,192,192,32,64);
+        // railing verticals
+        wallSet[7] = setTextureSubImage(originalImageWall,288,32,13,96);
+        wallSet[8] = setTextureSubImage(originalImageWall,344,32,12,96);
+        // railing horizontal
+        wallSet[9] = setTextureSubImage(originalImageWall,384,32,96,13);
+    }
+    private void putInTextureHelper(BufferedImage image, int worldX, int worldY){
+        Textures newTexture = new Textures(image, worldX, worldY);
+        textureList.add(newTexture);
     }
     public int[][] setupMap(){
 
@@ -70,7 +105,10 @@ public class TileManager extends SuperTileManager {
         }
     }
 
-    public void setUpDefault(){
+    public void setUpDefault(GamePanel gp){
+        this.gp = gp;
+        this.tools = new Tools();
+        textureList = new ArrayList<>();
         mapTileCol = 20;
         mapTileRow = 36;
         mapPixelHeight = mapTileCol*gp.size;
@@ -111,26 +149,7 @@ public class TileManager extends SuperTileManager {
         loadPropSet();
         loadWallSet();
     }
-    private void loadWallSet() throws IOException {
-        BufferedImage originalImageWall = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/WallSet.png")));
-        wallSet = new BufferedImage[11];
 
-        // up-high and down-low, small up-high structures
-        wallSet[0] = setTextureSubImage(originalImageWall,32,32,96,128);
-        wallSet[1] = setTextureSubImage(originalImageWall,152,32,114,104);
-        wallSet[2] = setTextureSubImage(originalImageWall,384,64,64,96);
-        // large wall piece, small wall piece normal, small wall piece damaged
-        wallSet[3] = setTextureSubImage(originalImageWall,32,192,128,64);
-        wallSet[4] = setTextureSubImage(originalImageWall,32,288,64,64);
-        wallSet[5] = setTextureSubImage(originalImageWall,128,288,64,64);
-        // small wall with window
-        wallSet[6] = setTextureSubImage(originalImageWall,192,192,32,64);
-        // railing verticals
-        wallSet[7] = setTextureSubImage(originalImageWall,288,32,13,96);
-        wallSet[8] = setTextureSubImage(originalImageWall,344,32,12,96);
-        // railing horizontal
-        wallSet[9] = setTextureSubImage(originalImageWall,384,32,96,13);
-    }
     private void loadShadowSet() throws IOException {
         // Shadows load
         BufferedImage originalImageShadow_1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet1.png")));
