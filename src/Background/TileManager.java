@@ -58,16 +58,15 @@ public class TileManager extends SuperTileManager {
     }
 
     public void displayTileArray(Graphics2D g2){
-        int height = 0;
-        int width;
         for (int i = 0; i < map.length; i++) {
-            width = 0;
             for (int j = 0; j < map[i].length; j++) {
+                int worldHeightPixel = gp.size * i;
+                int worldWidthPixel = gp.size * j;
+                int y_draw_from_player = worldHeightPixel - gp.player.getWorldY() + gp.player.getPlayerScreenY() + gp.player.getRaw_Player_Image_Y();
+                int x_draw_from_player = worldWidthPixel - gp.player.getWorldX() + gp.player.getPlayerScreenX() + gp.player.getRaw_Player_Image_X();
                 int currNum = map[i][j];
-                g2.drawImage(baseTileSet[currNum].getTileImage(),width,height,null);
-                width += gp.size;
+                g2.drawImage(baseTileSet[currNum].getTileImage(),x_draw_from_player,y_draw_from_player,null);
             }
-            height += gp.size;
         }
     }
 

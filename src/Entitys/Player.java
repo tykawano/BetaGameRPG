@@ -17,10 +17,11 @@ public class Player extends Entity{
     private final KbInputs kb;
     private final MouseInputs mouse;
     private final PlayerAnimationsSetter setter;
-    public final int raw_Player_Image_X = 37*3;
-    public final int raw_Player_Image_Y = 24*3;
-    public final int raw_Player_Image_Width = 14*3;
-    public final int raw_Player_Image_Height = 21*3;
+    // the dimensions for within the core image, where the player is in the box for idle animations
+    public final int raw_Player_Image_X = 36*4;
+    public final int raw_Player_Image_Y = 23*4;
+    public final int raw_Player_Image_Width = 16*4;
+    public final int raw_Player_Image_Height = 22*4;
     public int playerScreenX;
     public int playerScreenY;
     private int playerAction = idleDown;
@@ -36,11 +37,11 @@ public class Player extends Entity{
 
     public void defaultPlayer(){
         animations = setter.getPlayerAnimations();
-        worldX = 500;
-        worldY = 500;
+        worldX = 0;
+        worldY = 0;
         playerScreenX = (gp.pixelWidth/2) - raw_Player_Image_X - (raw_Player_Image_Width/2);
         playerScreenY = (gp.pixelHeight/2) - raw_Player_Image_Y - (raw_Player_Image_Height/2);
-        speed = 5;
+        speed = 6;
         direction = "down";
         animationTick = 0;
         animationIndex = 0;
@@ -149,7 +150,25 @@ public class Player extends Entity{
 
     public void draw(Graphics2D g2) throws InterruptedException {
         g2.drawImage(animations[playerAction][animationIndex],playerScreenX,playerScreenY,null);
+        g2.setColor(Color.WHITE);
+        g2.drawRect(playerScreenX + raw_Player_Image_X,playerScreenY + raw_Player_Image_Y,raw_Player_Image_Width,raw_Player_Image_Height);
     }
-
-
+    public int getPlayerScreenX() {
+        return playerScreenX;
+    }
+    public int getPlayerScreenY() {
+        return playerScreenY;
+    }
+    public int getRaw_Player_Image_X() {
+        return raw_Player_Image_X;
+    }
+    public int getRaw_Player_Image_Y() {
+        return raw_Player_Image_Y;
+    }
+    public int getRaw_Player_Image_Width() {
+        return raw_Player_Image_Width;
+    }
+    public int getRaw_Player_Image_Height() {
+        return raw_Player_Image_Height;
+    }
 }

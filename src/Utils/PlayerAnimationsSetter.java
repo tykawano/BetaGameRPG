@@ -18,7 +18,7 @@ public class PlayerAnimationsSetter {
     // loads all-player animations to the 2d array "playerAnimations"
     public void loadPlayerAnimations() throws IOException {
         Tools tools = new Tools();
-        BufferedImage animationSheet = ImageIO.read(Objects.requireNonNull(getClass().getResource("/PaidTest/With Sword/improveSheet.png")));
+        BufferedImage animationSheet = ImageIO.read(Objects.requireNonNull(getClass().getResource("/PaidTest/With Sword/ImproveSheet.png")));
         playerAnimations = new BufferedImage[29][24];
         boolean leftState = false;
         int height = 0;

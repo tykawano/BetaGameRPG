@@ -12,6 +12,12 @@ public abstract class Entity {
     public int animationIndex;
     public int animationSpeed;
 
+    public int getWorldX() {
+        return worldX;
+    }
 
+    public int getWorldY() {
+        return worldY;
+    }
 
 }
