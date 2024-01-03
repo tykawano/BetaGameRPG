@@ -285,7 +285,7 @@ public class TileManager extends SuperTileManager {
         // Shadows load
         BufferedImage originalImageShadow_1 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet1.png")));
         BufferedImage originalImageShadow_2 = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/ShadowSet2.png")));
-        float opacityValue = 0.3f;
+        float opacityValue = 0.2f;
         originalImageShadow_1 = tools.changeImageOpacity(originalImageShadow_1, opacityValue);
         originalImageShadow_2 = tools.changeImageOpacity(originalImageShadow_2, opacityValue);
         shadowSet = new BufferedImage[38];
