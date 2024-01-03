@@ -43,55 +43,6 @@ public class TileManager extends SuperTileManager {
         Textures newTexture = new Textures(image, worldX, worldY);
         textureList.add(newTexture);
     }
-    private void putInPark(){
-
-        // corners
-        putInTextureHelper(wallSet[10],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[11],26*gp.size,8*gp.size - gp.quarterTile);
-
-        putInTextureHelper(wallSet[12],10*gp.size + gp.halfTile + gp.quarterTile,13*gp.size);
-        putInTextureHelper(wallSet[12],23*gp.size + gp.quarterTile,13*gp.size);
-
-        // vertical wall elements
-        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size);
-        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,10*gp.size);
-
-        putInTextureHelper(wallSet[8],26*gp.size ,8*gp.size);
-        putInTextureHelper(wallSet[8],26*gp.size ,10*gp.size);
-
-        // horizontal wall elements
-        putInTextureHelper(wallSet[9],13*gp.size,8*gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[9],16*gp.size,8*gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[9],19*gp.size,8*gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[9],22*gp.size,8*gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[9],23*gp.size,8* gp.size - gp.quarterTile);
-        putInTextureHelper(wallSet[13],13*gp.size,13*gp.size - gp.quarterTile + 6);
-        putInTextureHelper(wallSet[13],16*gp.size,13*gp.size - gp.quarterTile + 6);
-        putInTextureHelper(wallSet[13],19*gp.size,13*gp.size - gp.quarterTile + 6);
-        putInTextureHelper(wallSet[13],22*gp.size,13*gp.size - gp.quarterTile + 6);
-
-        // spawner in middle
-        putInTextureHelper(propsSet[32],17*gp.size,9*gp.size + gp.quarterTile);
-
-        // pillars
-        putInTextureHelper(propsSet[13],23*gp.size,8*gp.size);
-        putInTextureHelper(propsSet[15],22*gp.size,10*gp.size + gp.halfTile);
-        putInTextureHelper(propsSet[14],16*gp.size,8*gp.size - gp.halfTile);
-        putInTextureHelper(propsSet[15],14*gp.size,11*gp.size);
-
-        // trees
-        putInTextureHelper(plantSet[1],23*gp.size,5*gp.size + gp.quarterTile);
-        putInTextureHelper(plantSet[2],24*gp.size + gp.quarterTile,9*gp.size);
-        putInTextureHelper(plantSet[1],10*gp.size,9*gp.size - gp.quarterTile);
-        putInTextureHelper(plantSet[2],11*gp.size + gp.quarterTile,6*gp.size - gp.quarterTile);
-
-        // benches
-        putInTextureHelper(propsSet[22],17*gp.size + gp.halfTile,7*gp.size + gp.halfTile);
-
-        // signs
-        putInTextureHelper(propsSet[5],21*gp.size,12*gp.size - gp.quarterTile);
-        putInTextureHelper(propsSet[6],15*gp.size,12*gp.size - gp.quarterTile);
-    }
     public void putIntTextures(){
         putInAlter();
         putInPark();
@@ -203,6 +154,70 @@ public class TileManager extends SuperTileManager {
         putInTextureHelper(plantSet[18],18*gp.size,gp.quarterTile + 10);
         putInTextureHelper(plantSet[9],17*gp.size,gp.size + gp.halfTile);
         putInTextureHelper(plantSet[15],19*gp.size,gp.size + gp.halfTile);
+    }
+
+    private void putInPark(){
+
+        // corners
+        putInTextureHelper(wallSet[10],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[11],26*gp.size,8*gp.size - gp.quarterTile);
+
+        putInTextureHelper(wallSet[12],10*gp.size + gp.halfTile + gp.quarterTile,13*gp.size);
+        putInTextureHelper(wallSet[12],23*gp.size + gp.quarterTile,13*gp.size);
+
+        // vertical wall elements
+        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size);
+        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,10*gp.size);
+
+        putInTextureHelper(wallSet[8],26*gp.size ,8*gp.size);
+        putInTextureHelper(wallSet[8],26*gp.size ,10*gp.size);
+
+        // horizontal wall elements
+        putInTextureHelper(wallSet[9],13*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],16*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],19*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],22*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],23*gp.size,8* gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[13],13*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],16*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],19*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],22*gp.size,13*gp.size - gp.quarterTile + 6);
+
+        // shadows
+        putInTextureHelper(shadowSet[36],17*gp.size,9*gp.size + gp.quarterTile);
+        putInTextureHelper(shadowSet[12],23*gp.size + 3,8*gp.size + gp.halfTile + 5);
+        putInTextureHelper(shadowSet[30],22*gp.size + 3,11*gp.size - 10);
+        putInTextureHelper(shadowSet[30],14*gp.size + 6,11*gp.size + gp.quarterTile + 3);
+        putInTextureHelper(shadowSet[19],16*gp.size,8*gp.size + 12);
+        putInTextureHelper(shadowSet[13],18*gp.size - gp.quarterTile,8*gp.size);
+        putInTextureHelper(shadowSet[1],23*gp.size + gp.quarterTile,8*gp.size);
+        putInTextureHelper(shadowSet[1],10*gp.size + gp.quarterTile,11*gp.size + gp.halfTile);
+        putInTextureHelper(shadowSet[2],24*gp.size + gp.halfTile,11*gp.size + gp.halfTile);
+        putInTextureHelper(shadowSet[2],11*gp.size + gp.halfTile,8*gp.size + gp.quarterTile);
+        putInTextureHelper(shadowSet[24],21*gp.size + 10,12*gp.size + gp.quarterTile);
+        putInTextureHelper(shadowSet[25],15*gp.size + 10,12*gp.size + gp.quarterTile);
+
+        // spawner in middle
+        putInTextureHelper(propsSet[32],17*gp.size,9*gp.size + gp.quarterTile);
+
+        // pillars
+        putInTextureHelper(propsSet[13],23*gp.size,8*gp.size);
+        putInTextureHelper(propsSet[15],22*gp.size,10*gp.size + gp.halfTile);
+        putInTextureHelper(propsSet[14],16*gp.size,8*gp.size - gp.halfTile);
+        putInTextureHelper(propsSet[15],14*gp.size,11*gp.size);
+
+        // trees
+        putInTextureHelper(plantSet[1],23*gp.size,5*gp.size + gp.quarterTile);
+        putInTextureHelper(plantSet[2],24*gp.size + gp.quarterTile,9*gp.size);
+        putInTextureHelper(plantSet[1],10*gp.size,9*gp.size - gp.quarterTile);
+        putInTextureHelper(plantSet[2],11*gp.size + gp.quarterTile,6*gp.size - gp.quarterTile);
+
+        // benches
+        putInTextureHelper(propsSet[22],17*gp.size + gp.halfTile,7*gp.size + gp.halfTile);
+
+        // signs
+        putInTextureHelper(propsSet[5],21*gp.size,12*gp.size - gp.quarterTile);
+        putInTextureHelper(propsSet[6],15*gp.size,12*gp.size - gp.quarterTile);
     }
     public void loadTileSet() throws IOException {
         baseTileSet = new Tile[138];
