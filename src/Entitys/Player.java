@@ -38,8 +38,8 @@ public class Player extends Entity{
 
     public void defaultPlayer(){
         animations = setter.getPlayerAnimations();
-        worldX = gp.manager.mapPixelWidth/2;
-        worldY = gp.manager.mapPixelHeight/2;
+        worldX = gp.manager.mapPixelWidth/2 + gp.halfTile;
+        worldY = gp.manager.mapPixelHeight/2 + gp.quarterTile;
         playerScreenX = (gp.pixelWidth/2) - raw_Player_Image_X - (raw_Player_Image_Width/2);
         playerScreenY = (gp.pixelHeight/2) - raw_Player_Image_Y - (raw_Player_Image_Height/2);
         speed = 6;

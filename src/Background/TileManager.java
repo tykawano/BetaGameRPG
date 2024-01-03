@@ -15,7 +15,7 @@ public class TileManager extends SuperTileManager {
     ArrayList<Textures> textureList;
     BufferedImage[] shadowSet;
     BufferedImage[] stairSet;
-    BufferedImage[] plantsSet;
+    BufferedImage[] plantSet;
     BufferedImage[] propsSet;
     BufferedImage[] wallSet;
     public TileManager(GamePanel gp) throws IOException {
@@ -38,61 +38,68 @@ public class TileManager extends SuperTileManager {
             g2.drawImage(textureCurr.getImage(),x_draw_from_player,y_draw_from_player,null);
         }
     }
-    private void putInAlter(){
-        // perimeter of walls horizontal
-        putInTextureHelper(wallSet[2],15*gp.size + 25, 0);
-        putInTextureHelper(wallSet[2],21*gp.size - 25, 0);
-        putInTextureHelper(wallSet[0],15*gp.size + 25,gp.size);
-        putInTextureHelper(wallSet[0],20*gp.size - 25,gp.size);
 
-        // grass tiles for under the stone
-        putInTextureHelper(baseTileSet[10].getTileImage(),20*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),17*gp.size, gp.size);
-
-        // grass tiles that fill up the alters top
-        putInTextureHelper(baseTileSet[10].getTileImage(),18*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),19*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),17*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),20*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),16*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),21*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),16*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),21*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),17*gp.size, 0);
-        putInTextureHelper(baseTileSet[10].getTileImage(),20*gp.size, 0);
-        putInTextureHelper(baseTileSet[10].getTileImage(),15*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),22*gp.size, 2*gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),15*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[10].getTileImage(),22*gp.size, gp.size);
-
-        // stone tiles for the items
-        putInTextureHelper(baseTileSet[99].getTileImage(),18*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[99].getTileImage(),19*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[98].getTileImage(),17*gp.size, gp.size);
-        putInTextureHelper(baseTileSet[100].getTileImage(),20*gp.size, gp.size);
-
-        // left and right vertical perimeter connector pieces
-        putInTextureHelper(wallSet[7],22*gp.size + 23, gp.size/2 - 26);
-        putInTextureHelper(wallSet[8],15*gp.size + 25, gp.size/2 - 24);
-
-        // horizontal for top connection for perimeter
-        putInTextureHelper(wallSet[9], (16*gp.size), 0);
-        putInTextureHelper(wallSet[9], (19*gp.size), 0);
-
-        // stairs
-        putInTextureHelper(stairSet[3],18*gp.size,3*gp.size);
-    }
     private void putInTextureHelper(BufferedImage image, int worldX, int worldY){
         Textures newTexture = new Textures(image, worldX, worldY);
         textureList.add(newTexture);
     }
+    private void putInPark(){
+
+        // corners
+        putInTextureHelper(wallSet[10],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[11],26*gp.size,8*gp.size - gp.quarterTile);
+
+        putInTextureHelper(wallSet[12],10*gp.size + gp.halfTile + gp.quarterTile,13*gp.size);
+        putInTextureHelper(wallSet[12],23*gp.size + gp.quarterTile,13*gp.size);
+
+        // vertical wall elements
+        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,8*gp.size);
+        putInTextureHelper(wallSet[8],10*gp.size + gp.halfTile + gp.quarterTile,10*gp.size);
+
+        putInTextureHelper(wallSet[8],26*gp.size ,8*gp.size);
+        putInTextureHelper(wallSet[8],26*gp.size ,10*gp.size);
+
+        // horizontal wall elements
+        putInTextureHelper(wallSet[9],13*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],16*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],19*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],22*gp.size,8*gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[9],23*gp.size,8* gp.size - gp.quarterTile);
+        putInTextureHelper(wallSet[13],13*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],16*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],19*gp.size,13*gp.size - gp.quarterTile + 6);
+        putInTextureHelper(wallSet[13],22*gp.size,13*gp.size - gp.quarterTile + 6);
+
+        // spawner in middle
+        putInTextureHelper(propsSet[32],17*gp.size,9*gp.size + gp.quarterTile);
+
+        // pillars
+        putInTextureHelper(propsSet[13],23*gp.size,8*gp.size);
+        putInTextureHelper(propsSet[15],22*gp.size,10*gp.size + gp.halfTile);
+        putInTextureHelper(propsSet[14],16*gp.size,8*gp.size - gp.halfTile);
+        putInTextureHelper(propsSet[15],14*gp.size,11*gp.size);
+
+        // trees
+        putInTextureHelper(plantSet[1],23*gp.size,5*gp.size + gp.quarterTile);
+        putInTextureHelper(plantSet[2],24*gp.size + gp.quarterTile,9*gp.size);
+        putInTextureHelper(plantSet[1],10*gp.size,9*gp.size - gp.quarterTile);
+        putInTextureHelper(plantSet[2],11*gp.size + gp.quarterTile,6*gp.size - gp.quarterTile);
+
+        // benches
+        putInTextureHelper(propsSet[22],17*gp.size + gp.halfTile,7*gp.size + gp.halfTile);
+
+        // signs
+        putInTextureHelper(propsSet[5],21*gp.size,12*gp.size - gp.quarterTile);
+        putInTextureHelper(propsSet[6],15*gp.size,12*gp.size - gp.quarterTile);
+    }
     public void putIntTextures(){
         putInAlter();
+        putInPark();
     }
     public int[][] setupMap(){
 
         return new int[][]{
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,37,10,25,12,10,21,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,65,50,50,71,48,70},
                 {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,52,43,42,43,42,42,58},
@@ -100,11 +107,11 @@ public class TileManager extends SuperTileManager {
                 {56,67,59,50,43,42,42,42,42,42,58,61,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,70,43,66,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,42,50,58,50,66,67,51,43,50,60,42,42,67,59,50,51,43,71,65,50,51,62,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,51,66,55,54,54,63,55,54,54,54,54,56,68,57,54,54,56,67,59,50,62,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,50,64,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,60,71,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,68,50,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,42,45,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,65,43,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,42,62,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,44,51,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,43,53,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,52,42,42,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,50,64,43,43,43,66,21,14,29,25,37,25,18,67,42,42,42,60,71,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,43,53,43,65,66,17,31,24,26,28,27,17,19,40,67,65,42,68,50,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,42,45,43,43,29,39,32,15,22,31,21,23,41,28,39,42,42,65,43,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,42,62,43,43,71,10,10,35,12,11,30,20,26,16,70,42,42,44,51,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,43,53,54,43,43,71,19,12,39,40,29,41,39,70,42,42,62,52,42,42,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,59,71,49,49,48,47,64,46,46,46,47,46,46,46,64,49,48,70,43,10,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,65,43,59,58,50,43,51,42,67,51,58,43,59,57,43,42,58,59,42,66,10,10,10,10,10,10,10,10},
                 {42,10,10,10,10,10,10,51,58,66,10,10,10,10,10,10,10,43,50,70,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
@@ -137,8 +144,66 @@ public class TileManager extends SuperTileManager {
         mapPixelHeight = mapTileCol*gp.size;
         mapPixelWidth = mapTileRow*gp.size;
     }
+    private void putInAlter(){
+        // perimeter of walls horizontal
+        putInTextureHelper(wallSet[2],15*gp.size + 25, 0);
+        putInTextureHelper(wallSet[2],21*gp.size - 25, 0);
+        putInTextureHelper(wallSet[0],15*gp.size + 25,gp.size);
+        putInTextureHelper(wallSet[0],20*gp.size - 25,gp.size);
 
+        // grass tiles for under the stone
+        putInTextureHelper(baseTileSet[10].getTileImage(),20*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[10].getTileImage(),17*gp.size, gp.size);
 
+        // grass tiles that fill up the alters top
+        putInTextureHelper(baseTileSet[31].getTileImage(),16*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[20].getTileImage(),16*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[19].getTileImage(),17*gp.size, 0);
+        putInTextureHelper(baseTileSet[41].getTileImage(),17*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[17].getTileImage(),18*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[36].getTileImage(),19*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[16].getTileImage(),20*gp.size, 0);
+        putInTextureHelper(baseTileSet[27].getTileImage(),20*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[33].getTileImage(),21*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[16].getTileImage(),21*gp.size, gp.size);
+
+        // half tiles covering the outside
+        putInTextureHelper(baseTileSet[10].getTileImage(),15*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[10].getTileImage(),15*gp.size, 2*gp.size);
+        putInTextureHelper(baseTileSet[10].getTileImage(),22*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[10].getTileImage(),22*gp.size, 2*gp.size);
+
+        // stone tiles for the items
+        putInTextureHelper(baseTileSet[99].getTileImage(),18*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[99].getTileImage(),19*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[98].getTileImage(),17*gp.size, gp.size);
+        putInTextureHelper(baseTileSet[100].getTileImage(),20*gp.size, gp.size);
+
+        // left and right vertical perimeter connector pieces
+        putInTextureHelper(wallSet[7],22*gp.size + 23, gp.size/2 - 26);
+        putInTextureHelper(wallSet[8],15*gp.size + 25, gp.size/2 - 24);
+
+        // horizontal for top connection for perimeter
+        putInTextureHelper(wallSet[9], (16*gp.size), 0);
+        putInTextureHelper(wallSet[9], (19*gp.size), 0);
+
+        // stairs
+        putInTextureHelper(stairSet[3],18*gp.size,3*gp.size);
+
+        // shadows for bush
+        putInTextureHelper(shadowSet[5],21*gp.size + gp.quarterTile,gp.halfTile);
+        // shadows for bush
+        putInTextureHelper(shadowSet[6],16*gp.size + gp.quarterTile,gp.halfTile);
+
+        // bush top right and left
+        putInTextureHelper(plantSet[5],21*gp.size,0);
+        putInTextureHelper(plantSet[6],16*gp.size,0);
+
+        // grass blades around stone
+        putInTextureHelper(plantSet[18],18*gp.size,gp.quarterTile + 10);
+        putInTextureHelper(plantSet[9],17*gp.size,gp.size + gp.halfTile);
+        putInTextureHelper(plantSet[15],19*gp.size,gp.size + gp.halfTile);
+    }
     public void loadTileSet() throws IOException {
         baseTileSet = new Tile[138];
         BufferedImage originalImageGrass = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/GrassSet.png")));
@@ -174,7 +239,8 @@ public class TileManager extends SuperTileManager {
     }
     private void loadWallSet() throws IOException {
         BufferedImage originalImageWall = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/WallSet.png")));
-        wallSet = new BufferedImage[11];
+        BufferedImage originalCurve = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/curve1.png")));
+        wallSet = new BufferedImage[14];
 
         // up-high and down-low, small up-high structures
         wallSet[0] = setTextureSubImage(originalImageWall,32,32,96,128);
@@ -191,6 +257,13 @@ public class TileManager extends SuperTileManager {
         wallSet[8] = setTextureSubImage(originalImageWall,344,32,12,96);
         // railing horizontal
         wallSet[9] = setTextureSubImage(originalImageWall,384,32,96,13);
+        // curved railings
+        wallSet[10] = setTextureSubImage(originalCurve,0,0,96,8);
+        wallSet[11] = tools.rotateClockwise90Degrees(wallSet[10]);
+        wallSet[12] = tools.flipVertically(wallSet[10]);
+
+        // railing horizontal bottom
+        wallSet[13] = tools.flipVertically(wallSet[9]);
     }
 
     private void loadShadowSet() throws IOException {
@@ -300,26 +373,26 @@ public class TileManager extends SuperTileManager {
     }
     private void loadPlantSet() throws IOException {
         BufferedImage originalImagePlant = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/PlantSet.png")));
-        plantsSet = new BufferedImage[25];
+        plantSet = new BufferedImage[25];
 
         // Trees small, medium and large
-        plantsSet[0] = setTextureSubImage(originalImagePlant,24,14,113,139);
-        plantsSet[1] = setTextureSubImage(originalImagePlant,161,17,95,136);
-        plantsSet[2] = setTextureSubImage(originalImagePlant,295,31,79,120);
+        plantSet[0] = setTextureSubImage(originalImagePlant,24,14,113,139);
+        plantSet[1] = setTextureSubImage(originalImagePlant,161,17,95,136);
+        plantSet[2] = setTextureSubImage(originalImagePlant,295,31,79,120);
 
         // bushes small to big
-        plantsSet[3] = setTextureSubImage(originalImagePlant,38,198,22,19);
-        plantsSet[4] = setTextureSubImage(originalImagePlant,98,195,27,25);
-        plantsSet[5] = setTextureSubImage(originalImagePlant,156,190,38,32);
-        plantsSet[6] = setTextureSubImage(originalImagePlant,216,185,47,42);
-        plantsSet[7] = setTextureSubImage(originalImagePlant,282,186,39,45);
-        plantsSet[8] = setTextureSubImage(originalImagePlant,346,190,40,35);
+        plantSet[3] = setTextureSubImage(originalImagePlant,38,198,22,19);
+        plantSet[4] = setTextureSubImage(originalImagePlant,98,195,27,25);
+        plantSet[5] = setTextureSubImage(originalImagePlant,156,190,38,32);
+        plantSet[6] = setTextureSubImage(originalImagePlant,216,185,47,42);
+        plantSet[7] = setTextureSubImage(originalImagePlant,282,186,39,45);
+        plantSet[8] = setTextureSubImage(originalImagePlant,346,190,40,35);
 
         // blades of grass
         int index = 9;
         for (int i = 384; i < 512; i+=32) {
             for (int j = 0; j < 128; j+=32) {
-                plantsSet[index] = setTextureSubImage(originalImagePlant,j,i,32,32);
+                plantSet[index] = setTextureSubImage(originalImagePlant,j,i,32,32);
                 index++;
             }
         }

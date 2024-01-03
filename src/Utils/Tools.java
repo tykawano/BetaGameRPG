@@ -1,6 +1,7 @@
 package Utils;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class Tools {
@@ -14,6 +15,37 @@ public class Tools {
                 flippedImage.setRGB(width - x - 1, y, image.getRGB(x, y));
             }
         }
+
+        return flippedImage;
+    }
+
+    public BufferedImage rotateClockwise90Degrees(BufferedImage originalImage) {
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
+
+        BufferedImage rotatedImage = new BufferedImage(height, width, originalImage.getType());
+        Graphics2D g2d = rotatedImage.createGraphics();
+
+        AffineTransform transform = new AffineTransform();
+        transform.translate(height, 0);
+        transform.rotate(Math.PI / 2);
+
+        g2d.setTransform(transform);
+        g2d.drawImage(originalImage, 0, 0, null);
+        g2d.dispose();
+
+        return rotatedImage;
+    }
+    public BufferedImage flipVertically(BufferedImage originalImage) {
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
+
+        BufferedImage flippedImage = new BufferedImage(width, height, originalImage.getType());
+        Graphics2D g2d = flippedImage.createGraphics();
+
+        // Flip the image vertically
+        g2d.drawImage(originalImage, 0, height, width, -height, null);
+        g2d.dispose();
 
         return flippedImage;
     }

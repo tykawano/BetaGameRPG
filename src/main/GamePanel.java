@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int pixelHeight = colNum*size; // Height: 640 px
     public final int pixelWidth = rowNum*size; // Width: 1152 px
     public final int halfTile = size/2;
+    public final int quarterTile = size/4;
     private final int fps = 90;
 
 
