@@ -1,8 +1,11 @@
 package Entitys;
 
+import main.GamePanel;
+
 import java.awt.*;
 
 public abstract class Entity {
+    GamePanel gp;
     public int worldX;
     public int worldY;
     public int speed;
@@ -11,6 +14,9 @@ public abstract class Entity {
     public int animationTick;
     public int animationIndex;
     public int animationSpeed;
+    public Entity(GamePanel gp){
+        this.gp = gp;
+    }
 
     public int getWorldX() {
         return worldX;

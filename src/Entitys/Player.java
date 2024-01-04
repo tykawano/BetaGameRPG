@@ -2,7 +2,6 @@ package Entitys;
 
 import Inputs.KbInputs;
 import Inputs.MouseInputs;
-import Utils.Constants;
 import Utils.PlayerAnimationsSetter;
 import main.GamePanel;
 
@@ -13,8 +12,6 @@ import java.io.IOException;
 import static Utils.Constants.PlayerConstants.*;
 
 public class Player extends Entity{
-
-    private final GamePanel gp;
     private final KbInputs kb;
     private final MouseInputs mouse;
     private final PlayerAnimationsSetter setter;
@@ -29,7 +26,7 @@ public class Player extends Entity{
     private BufferedImage[][] animations;
     public boolean vertMovement;
     public Player(GamePanel gp, KbInputs kb, MouseInputs mouse) throws IOException {
-        this.gp = gp;
+        super(gp);
         this.kb = kb;
         this.mouse = mouse;
         this.setter = new PlayerAnimationsSetter();
