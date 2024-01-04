@@ -76,5 +76,13 @@ public class Tools {
         return resultImage;
     }
 
+    public BufferedImage setTextureSubImage(BufferedImage originalImage, int x,int y, int width, int height){
+        BufferedImage scaledImage;
+        originalImage = originalImage.getSubimage(x,y,width,height);
+        scaledImage = scaleImage(originalImage,width*2,height*2);
+
+        return scaledImage;
+    }
+
 
 }
