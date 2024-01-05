@@ -21,6 +21,7 @@ public class TileManager extends SuperTileManager {
     BufferedImage[] plantSet;
     BufferedImage[] propsSet;
     BufferedImage[] wallSet;
+    BufferedImage[] villageSet;
     public TileManager(GamePanel gp) throws IOException {
         this.setUpDefault(gp);
         map = home.setupMap();
@@ -57,6 +58,7 @@ public class TileManager extends SuperTileManager {
     public void draw(Graphics2D g2){
         displayTileArray(g2);
         displayTextures(g2);
+        g2.drawImage(villageSet[28],0,0,null);
     }
 
     public void setUpDefault(GamePanel gp){
@@ -205,6 +207,7 @@ public class TileManager extends SuperTileManager {
         stairSet = loadSave.loadStairSet(8,"StairSet.png");
         plantSet = loadSave.loadPlantSet(25,"PlantSet.png");
         propsSet = loadSave.loadPropSet(48,"PropsSet.png");
+        villageSet = loadSave.loadVillageSet(40,"Village.png","singleHouse.png");
     }
 }
 

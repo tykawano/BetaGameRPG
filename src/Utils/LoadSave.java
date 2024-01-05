@@ -288,4 +288,58 @@ public class LoadSave {
 
         return propsSet;
     }
+
+    public BufferedImage[] loadVillageSet(int size, String path, String path2) throws IOException {
+        BufferedImage originalImageVillage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/VillageTileset/32x32/" + path)));
+        BufferedImage singleImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/VillageTileset/32x32/" + path2)));
+        BufferedImage[] villageSet = new BufferedImage[size];
+
+        // house banners
+        villageSet[0] = tools.setTextureSubImage(originalImageVillage, 544,18,32,28);
+        villageSet[1] = tools.setTextureSubImage(originalImageVillage, 576,18,32,28);
+        villageSet[2] = tools.setTextureSubImage(originalImageVillage, 608,18,32,28);
+        villageSet[3] = tools.setTextureSubImage(originalImageVillage,640,18,32,28);
+        villageSet[4] = tools.setTextureSubImage(originalImageVillage,672,18,32,28);
+        villageSet[5] = tools.setTextureSubImage(originalImageVillage,704,18,32,28);
+        villageSet[6] = tools.setTextureSubImage(originalImageVillage,736,18,32,28);
+        villageSet[7] = tools.setTextureSubImage(originalImageVillage,768,18,32,28);
+
+        // windows
+        villageSet[8] = tools.setTextureSubImage(originalImageVillage,802,16,28,32);
+        villageSet[9] = tools.setTextureSubImage(originalImageVillage,834,16,28,32);
+        villageSet[10] = tools.setTextureSubImage(originalImageVillage,866,16,28,32);
+        villageSet[11] = tools.setTextureSubImage(originalImageVillage,898,16,28,32);
+        villageSet[12] = tools.setTextureSubImage(originalImageVillage,932,22,24,22);
+        villageSet[13] = tools.setTextureSubImage(originalImageVillage,964,22,24,22);
+
+        // big house banners
+        villageSet[14] = tools.setTextureSubImage(originalImageVillage,898,82,60,28);
+        villageSet[15] = tools.setTextureSubImage(originalImageVillage,962,82,60,28);
+
+        // windows with house-top part
+        villageSet[16] = tools.setTextureSubImage(originalImageVillage,768,64,64,64);
+        villageSet[17] = tools.setTextureSubImage(originalImageVillage,832,64,64,64);
+        villageSet[18] = tools.setTextureSubImage(originalImageVillage,768,128,64,64);
+        villageSet[19] = tools.setTextureSubImage(originalImageVillage,832,128,64,64);
+        villageSet[20] = tools.setTextureSubImage(originalImageVillage,768,192,64,64);
+        villageSet[21] = tools.setTextureSubImage(originalImageVillage,832,192,64,64);
+
+        // water shed with water and no water
+        villageSet[22] = tools.setTextureSubImage(originalImageVillage,386,164,62,88);
+        villageSet[23] = tools.setTextureSubImage(originalImageVillage,450,164,62,88);
+
+        // small and big ended houses
+        villageSet[24] = tools.setTextureSubImage(originalImageVillage,512,68,256,220);
+        villageSet[25] = tools.setTextureSubImage(originalImageVillage,512,292,320,220);
+
+        // chimneys left and right facing
+        villageSet[26] = tools.setTextureSubImage(originalImageVillage,784,258,32,62);
+        villageSet[27] = tools.setTextureSubImage(originalImageVillage,848,258,32,62);
+
+        // single house
+        villageSet[28] = tools.setTextureSubImage(singleImage,0,0,singleImage.getWidth(),singleImage.getHeight());
+
+        //
+        return villageSet;
+    }
 }
