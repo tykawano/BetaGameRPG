@@ -1,7 +1,6 @@
 package Utils;
 
 
-import Background.Textures;
 import Background.Tile;
 
 import javax.imageio.ImageIO;
@@ -339,7 +338,20 @@ public class LoadSave {
         // single house
         villageSet[28] = tools.setTextureSubImage(singleImage,0,0,singleImage.getWidth(),singleImage.getHeight());
 
-        //
+        //half-houses small and big ended and single house
+        villageSet[29] = tools.setTextureSubImage(originalImageVillage,36,512,248,128);
+        villageSet[30] = tools.setTextureSubImage(originalImageVillage,4,672,312,128);
+        villageSet[31] = tools.setTextureSubImage(originalImageVillage,352,512,128,128);
+
+        // blue house roofs small, big, and single
+        villageSet[32] = tools.setTextureSubImage(originalImageVillage,512,548,256,156);
+        villageSet[33] = tools.setTextureSubImage(originalImageVillage,512,708,320,156);
+        villageSet[34] = tools.setTextureSubImage(originalImageVillage,864,708,128,156);
+        // brown house roofs small, big, and single
+        villageSet[35] = tools.setTextureSubImage(originalImageVillage,768,548,256,156);
+        villageSet[36] = tools.setTextureSubImage(originalImageVillage,512,868,320,156);
+        villageSet[37] = tools.setTextureSubImage(originalImageVillage,864,868,128,156);
+
         return villageSet;
     }
 }

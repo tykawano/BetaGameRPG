@@ -4,12 +4,10 @@ import Utils.LoadSave;
 import Utils.Tools;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class TileManager extends SuperTileManager {
     BaseLevelData home;
@@ -58,7 +56,7 @@ public class TileManager extends SuperTileManager {
     public void draw(Graphics2D g2){
         displayTileArray(g2);
         displayTextures(g2);
-        g2.drawImage(villageSet[28],0,0,null);
+        g2.drawImage(villageSet[37],0,0,null);
     }
 
     public void setUpDefault(GamePanel gp){
