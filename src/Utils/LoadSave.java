@@ -1,7 +1,7 @@
 package Utils;
 
 
-import Background.Tile;
+import main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,12 +9,31 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoadSave {
+    GamePanel gp;
     Tools tools;
-    public LoadSave(){
+    BufferedImage[] baseTileSet;
+    BufferedImage[] shadowSet;
+    BufferedImage[] stairSet;
+    BufferedImage[] plantSet;
+    BufferedImage[] propsSet;
+    BufferedImage[] wallSet;
+    BufferedImage[] villageSet;
+    public LoadSave(GamePanel gp) throws IOException {
+        this.gp = gp;
         tools = new Tools();
+        loadInAssets();
     }
-    public Tile[] loadTileSet(int size, int tileSizeScale, String path, String path2) throws IOException {
-        Tile[] baseTileSet = new Tile[size];
+    public void loadInAssets() throws IOException {
+        baseTileSet = loadTileSet(138,gp.size,"GrassSet.png","StoneSet.png");
+        wallSet = loadWallSet(14,"WallSet.png","curve1.png");
+        shadowSet = loadShadowSet(38,"ShadowSet1.png", "ShadowSet2.png");
+        stairSet = loadStairSet(8,"StairSet.png");
+        plantSet = loadPlantSet(25,"PlantSet.png");
+        propsSet = loadPropSet(48,"PropsSet.png");
+        villageSet = loadVillageSet(46,"Village.png","singleHouse.png");
+    }
+    public BufferedImage[] loadTileSet(int size, int tileSizeScale, String path, String path2) throws IOException {
+        BufferedImage[] baseTileSet = new BufferedImage[size];
         BufferedImage originalImageGrass = ImageIO.read(Objects.requireNonNull(getClass().getResource("/Texture/" + path)));
         BufferedImage temp;
         int index = 10;
@@ -22,7 +41,7 @@ public class LoadSave {
             for (int j = 0; j < originalImageGrass.getWidth(); j+=32) {
                 temp = originalImageGrass.getSubimage(j,i,32,32);
                 temp = tools.scaleImage(temp, tileSizeScale,tileSizeScale);
-                baseTileSet[index] = new Tile(temp, "Grass");
+                baseTileSet[index] = temp;
                 index++;
             }
         }
@@ -33,7 +52,7 @@ public class LoadSave {
             for (int j = 0; j < originalImageStone.getWidth(); j+=32) {
                 temp = originalImageStone.getSubimage(j,i,32,32);
                 temp = tools.scaleImage(temp, tileSizeScale,tileSizeScale);
-                baseTileSet[index] = new Tile(temp, "Stone");
+                baseTileSet[index] = temp;
                 index++;
             }
         }
@@ -352,6 +371,45 @@ public class LoadSave {
         villageSet[36] = tools.setTextureSubImage(originalImageVillage,512,868,320,156);
         villageSet[37] = tools.setTextureSubImage(originalImageVillage,864,868,128,156);
 
+        // doors normal
+        villageSet[38] = tools.setTextureSubImage(originalImageVillage,0,280,32,38);
+        villageSet[39] = tools.setTextureSubImage(originalImageVillage,0,344,32,38);
+        villageSet[40] = tools.setTextureSubImage(originalImageVillage,0,408,32,38);
+        villageSet[41] = tools.setTextureSubImage(originalImageVillage,0,472,32,38);
+
+        // doors with perimeter
+        villageSet[42] = tools.setTextureSubImage(originalImageVillage,54,268,52,52);
+        villageSet[43] = tools.setTextureSubImage(originalImageVillage,54,332,52,52);
+        villageSet[44] = tools.setTextureSubImage(originalImageVillage,54,396,52,52);
+        villageSet[45] = tools.setTextureSubImage(originalImageVillage,54,460,52,52);
         return villageSet;
+    }
+
+    public BufferedImage[] getBaseTileSet() {
+        return baseTileSet;
+    }
+
+    public BufferedImage[] getPlantSet() {
+        return plantSet;
+    }
+
+    public BufferedImage[] getPropsSet() {
+        return propsSet;
+    }
+
+    public BufferedImage[] getShadowSet() {
+        return shadowSet;
+    }
+
+    public BufferedImage[] getStairSet() {
+        return stairSet;
+    }
+
+    public BufferedImage[] getVillageSet() {
+        return villageSet;
+    }
+
+    public BufferedImage[] getWallSet() {
+        return wallSet;
     }
 }
