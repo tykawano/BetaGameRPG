@@ -33,30 +33,32 @@ public class HomeBase extends Super_Level{
     }
     private void putInHouse(){
         // the house itself
-        putInTextureHelper(villageSet[24],gp.size,9*gp.size);
+        putInTextureHelper(villageSet[24],20*gp.size,13*gp.size);
 
         // door
-        putInTextureHelper(villageSet[38],5*gp.size,14*gp.size + gp.halfTile + 10);
+        putInTextureHelper(villageSet[38],24*gp.size,18*gp.size + gp.halfTile + 10);
 
         // window
-        putInTextureHelper(villageSet[8],4*gp.size + gp.halfTile,12*gp.size + gp.halfTile);
+        putInTextureHelper(villageSet[8],23*gp.size + gp.halfTile,16*gp.size + gp.halfTile);
 
         // chimney
-        putInTextureHelper(villageSet[26],3*gp.size + gp.halfTile,11*gp.size );
+        putInTextureHelper(villageSet[26],22*gp.size + gp.halfTile,15*gp.size);
 
         // sign for a house
-        putInTextureHelper(villageSet[1],3*gp.size + gp.halfTile,14*gp.size);
+        putInTextureHelper(villageSet[1],22*gp.size + gp.halfTile,18*gp.size);
+
+        
 
     }
 
     public void setUpDefault(){
         this.tools = new Tools();
         texturesList = new ArrayList<>();
-        mapTileCol = 20;
-        mapTileRow = 36;
+        map = setupMap();
+        mapTileCol = map.length;
+        mapTileRow = map[0].length;
         mapPixelHeight = mapTileCol*gp.size;
         mapPixelWidth = mapTileRow*gp.size;
-        map = setupMap();
     }
     public void putIntTextures(){
         putInBackgroundTiles();
@@ -89,7 +91,9 @@ public class HomeBase extends Super_Level{
                 {42,43,42,10,10,42,10,51,58,66,10,10,10,10,10,10,10,43,50,70,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
                 {10,10,42,42,42,43,50,66,62,10,10,10,10,10,10,10,10,51,51,59,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,50,50,51,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
-                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,59,43,43,42,42,42,42,42,42,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,59,43,43,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,43,42,42,43,42,10,10,42,10,42,42,10,10,10,10,10,10,10,10},
+                {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,59,43,42,10,42,42,42,42,42,42,10,10,10,10,10,10,10,10,10},
                 {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,43,42,42,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10},
         };
     }

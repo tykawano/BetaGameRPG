@@ -30,7 +30,7 @@ public class LoadSave {
         stairSet = loadStairSet(8,"StairSet.png");
         plantSet = loadPlantSet(25,"PlantSet.png");
         propsSet = loadPropSet(48,"PropsSet.png");
-        villageSet = loadVillageSet(46,"Village.png","singleHouse.png");
+        villageSet = loadVillageSet(55,"Village.png","singleHouse.png");
     }
     public BufferedImage[] loadTileSet(int size, int tileSizeScale, String path, String path2) throws IOException {
         BufferedImage[] baseTileSet = new BufferedImage[size];
@@ -382,6 +382,15 @@ public class LoadSave {
         villageSet[43] = tools.setTextureSubImage(originalImageVillage,54,332,52,52);
         villageSet[44] = tools.setTextureSubImage(originalImageVillage,54,396,52,52);
         villageSet[45] = tools.setTextureSubImage(originalImageVillage,54,460,52,52);
+
+        // logs small, medium large
+        villageSet[46] = tools.setTextureSubImage(originalImageVillage,132,352,26,64);
+        villageSet[47] = tools.setTextureSubImage(originalImageVillage,162,352,26,32);
+        villageSet[48] = tools.setTextureSubImage(originalImageVillage,132,436,50,76);
+
+        // empty and full hay bails
+        villageSet[49] = tools.setTextureSubImage(originalImageVillage,192,212,64,44);
+        villageSet[50] = tools.setTextureSubImage(originalImageVillage,192,276,64,44);
         return villageSet;
     }
 
