@@ -44,6 +44,7 @@ public class TileManager {
                     textureCurr.getWorldY() - (textureCurr.getImage().getHeight() + gp.halfTile) < gp.player.worldY + (gp.player.playerScreenY + gp.player.getRaw_Player_Image_Y())){
                 int y_draw_from_player = textureCurr.getWorldY() - gp.player.getWorldY() + gp.player.getPlayerScreenY() + gp.player.getRaw_Player_Image_Y();
                 int x_draw_from_player = textureCurr.getWorldX() - gp.player.getWorldX() + gp.player.getPlayerScreenX() + gp.player.getRaw_Player_Image_X();
+                System.out.println(textureCurr.getImage().getWidth() + " " + textureCurr.getImage().getHeight());
                 g2.drawImage(textureCurr.getImage(),x_draw_from_player,y_draw_from_player,null);
             }
         }

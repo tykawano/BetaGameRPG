@@ -46,9 +46,6 @@ public class HomeBase extends Super_Level{
 
         // sign for a house
         putInTextureHelper(villageSet[1],22*gp.size + gp.halfTile,18*gp.size);
-
-        
-
     }
 
     public void setUpDefault(){
